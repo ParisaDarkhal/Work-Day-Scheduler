@@ -12,9 +12,9 @@ $(function () {
     $(mainContainer).append(generateRow(workHours[i]));
   }
 
-  let saveBtn = $("#saveBtn");
+  // let saveBtn = $("#saveBtn");
 
-  $(saveBtn).click(function () {
+  $(mainContainer).click($("button"), function () {
     console.log("i am clicked");
   });
   // TODO: Add a listener for click events on the save button. This code should
