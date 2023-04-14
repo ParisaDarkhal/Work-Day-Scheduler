@@ -4,6 +4,7 @@
 
 $(function () {
   let now = dayjs().format("MM/DD/YYYY");
+  $("#currentDay").html(now);
   let startTime = 9;
   let endTime = 18;
 
@@ -17,7 +18,7 @@ $(function () {
 
   for (let i = 0; i < workHours.length; i++) {
     $(mainContainer).append(generateRow(workHours[i]));
-
+    //get the text from text area and save it in local storage
     let inputText = $("#hour-" + workHours[i] + " .description");
 
     if (localStorage.getItem("textInput" + workHours[i])) {
@@ -42,22 +43,10 @@ $(function () {
       myNewDiv.addClass("future");
     }
   }
-  //get the text from text area and save it in local storage
-  // let inputText = $("#hour-" + workHours[i] + " .description");
-  // $(inputText.change(), function () {
-  //   localStorage.setItem(
-  //     "inputText-hour-" + workHours[i] + " ",
-  //     $(inputText).val()
-  //   );
-  // });
 
   //get the save btn and assign the function to save input from text area
   $(mainContainer).click($("button"), function () {
     console.log("I am clicked");
-
-    // let inputText = $("#hour-9 ").val();
-    // console.log("inputText :>> ", inputText);
-    // localStorage.setItem("inputText", inputText);
   });
 
   //   // TODO: Add a listener for click events on the save button. This code should
