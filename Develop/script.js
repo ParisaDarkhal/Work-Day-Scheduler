@@ -29,8 +29,14 @@ $(function () {
     }
   }
 
+  //get the text from text area and save it in local storage
+
+  // let textarea = $(".description");
+
   $(mainContainer).click($("button"), function () {
-    console.log("i am clicked");
+    let inputText = $("#hour-9 .description").value;
+    console.log("inputText :>> ", inputText);
+    localStorage.setItem("inputText", inputText);
   });
 
   //   // TODO: Add a listener for click events on the save button. This code should
