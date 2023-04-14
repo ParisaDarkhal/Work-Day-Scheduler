@@ -18,6 +18,20 @@ $(function () {
   for (let i = 0; i < workHours.length; i++) {
     $(mainContainer).append(generateRow(workHours[i]));
 
+    let inputText = $("#hour-" + workHours[i] + " .description");
+
+    if (localStorage.getItem("textInput" + workHours[i])) {
+      $(inputText).val(localStorage.getItem("textInput" + workHours[i]));
+      $(inputText).text(localStorage.getItem("textInput" + workHours[i]));
+    }
+
+    $(inputText).change(function (event) {
+      $(inputText).val(event.target.value);
+      $(inputText).text(inputText.val());
+
+      localStorage.setItem("textInput" + workHours[i], inputText.val());
+    });
+
     let myNewDiv = $("#hour-" + workHours[i]);
 
     if (workHours[i] == currentHour) {
@@ -28,15 +42,22 @@ $(function () {
       myNewDiv.addClass("future");
     }
   }
-
   //get the text from text area and save it in local storage
+  // let inputText = $("#hour-" + workHours[i] + " .description");
+  // $(inputText.change(), function () {
+  //   localStorage.setItem(
+  //     "inputText-hour-" + workHours[i] + " ",
+  //     $(inputText).val()
+  //   );
+  // });
 
-  // let textarea = $(".description");
-
+  //get the save btn and assign the function to save input from text area
   $(mainContainer).click($("button"), function () {
-    let inputText = $("#hour-9 .description").value;
-    console.log("inputText :>> ", inputText);
-    localStorage.setItem("inputText", inputText);
+    console.log("I am clicked");
+
+    // let inputText = $("#hour-9 ").val();
+    // console.log("inputText :>> ", inputText);
+    // localStorage.setItem("inputText", inputText);
   });
 
   //   // TODO: Add a listener for click events on the save button. This code should
@@ -75,7 +96,7 @@ $(function () {
       "<div class='col-2 col-md-1 hour text-center py-3'>" +
       hour12ver +
       "</div>" +
-      "<textarea class='col-8 col-md-10 description' rows='3'>" +
+      "<textarea class='col-8 col-md-10 description' rows='3' value=''>" +
       "</textarea>" +
       "<button class='btn saveBtn col-2 col-md-1' aria-label='save'>" +
       "<i class='fas fa-save' aria-hidden='true'></i></button>" +
