@@ -2,7 +2,7 @@
 
 The Work Day Scheduler is a simple web application that helps you log and show your daily plans based on the time(hour) it is scheduled to be done. It allows you to enter a "To Do" for each hour of the work day (9am to 5pm) and color codes the hours based on their status: gray for past, green for future, and red for present.
 
-[Visit Deployed Page](https://www.google.com)
+[Visit Deployed Page](https://parisadarkhal.github.io/Work-Day-Scheduler/)
 
 ---
 
