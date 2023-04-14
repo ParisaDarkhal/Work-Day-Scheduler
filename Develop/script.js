@@ -4,15 +4,34 @@
 
 $(function () {
   let now = dayjs();
+
+  let startTime = 9;
+  let endTime = 18;
+
   let currentDate = now.format("MM-DD-YYYY");
-  let currentHour = now.hour();
+  // let currentHour = dayjs().format("hA");
+  let currentHour = dayjs().startOf("day").hour();
+  // console.log("currentHour :>> ", currentHour);
   let mainContainer = $(".main-container");
-  let workHours = [9, 10, 11, 12, 13, 14, 15, 16, 17];
-  for (let i = 0; i < workHours.length; i++) {
-    $(mainContainer).append(generateRow(workHours[i]));
+  let workHours = [];
+
+  for (let hour = startTime; hour < endTime; hour++) {
+    workHours.push(dayjs().startOf("day").hour(hour).format("hA"));
   }
 
-  // let saveBtn = $("#saveBtn");
+  for (let i = 0; i < workHours.length; i++) {
+    $(mainContainer).append(generateRow(workHours[i]));
+
+    let myNewDiv = $("#hour-" + parseInt(workHours[i]));
+
+    if (workHours[i] === currentHour) {
+      myNewDiv.addClass("present");
+    } else if (dayjs(workHours[i]).isBefore(currentHour)) {
+      myNewDiv.addClass("past");
+    } else {
+      myNewDiv.addClass("future");
+    }
+  }
 
   $(mainContainer).click($("button"), function () {
     console.log("i am clicked");
@@ -35,20 +54,21 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
-});
 
-function generateRow(hour) {
-  let newDiv =
-    "<div id='hour-" +
-    hour +
-    "' class='row time-block past'>" +
-    "<div class='col-2 col-md-1 hour text-center py-3'>" +
-    hour +
-    "</div>" +
-    "<textarea class='col-8 col-md-10 description' rows='3'>" +
-    "</textarea>" +
-    "<button class='btn saveBtn col-2 col-md-1' aria-label='save'>" +
-    "<i class='fas fa-save' aria-hidden='true'></i></button>" +
-    "</div>";
-  return newDiv;
-}
+  function generateRow(hour) {
+    let newDiv =
+      "<div id='hour-" +
+      parseInt(hour) +
+      "' class='row time-block'>" +
+      "<div class='col-2 col-md-1 hour text-center py-3'>" +
+      hour +
+      "</div>" +
+      "<textarea class='col-8 col-md-10 description' rows='3'>" +
+      "</textarea>" +
+      "<button class='btn saveBtn col-2 col-md-1' aria-label='save'>" +
+      "<i class='fas fa-save' aria-hidden='true'></i></button>" +
+      "</div>";
+
+    return newDiv;
+  }
+});
